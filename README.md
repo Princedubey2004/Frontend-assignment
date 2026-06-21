@@ -1,77 +1,237 @@
-# TaskBoard
+TaskBoard
 
-A lightweight SaaS task management platform built as a senior frontend engineering take-home assignment.
+A modern SaaS-inspired task management platform built as a frontend engineering assignment using Next.js 15, React 19, TypeScript, Zustand, and TanStack Query.
 
-It features authentication, workspaces, dynamic Kanban boards with drag-and-drop support, search/priority filtering, and read-only public board sharing.
+The application enables users to create workspaces, manage Kanban boards, organize tasks with drag-and-drop interactions, monitor workspace activity, and share boards publicly through read-only links.
 
-## Tech Stack
+⸻
 
-* **Core**: Next.js 15 (App Router), React 19, TypeScript
-* **State Management**: 
-  * Server Cache: TanStack Query (React Query)
-  * Local UI State: Zustand
-* **Drag-and-Drop**: `@hello-pangea/dnd`
-* **Styling**: Tailwind CSS
-* **API Client**: Axios (wrapping mock client adapters)
+Live Demo
 
----
+Application:
+https://frontend-assignment-two-roan.vercel.app/login
 
-## Folder Structure & Architecture
+GitHub Repository:
+https://github.com/Princedubey2004/Frontend-assignment
 
-The project follows a feature-based organization to ensure scalability:
+⸻
 
-```text
+Features
+
+Authentication & Session Management
+
+* Login-based workspace access
+* Protected dashboard routes
+* Session expiration detection
+* Automatic redirect for unauthorized users
+
+Workspace Management
+
+* Multiple workspace support
+* Workspace switching from sidebar
+* Workspace-scoped boards and activity feeds
+
+Kanban Board System
+
+* Create and manage boards
+* Drag-and-drop task movement between columns
+* Optimistic UI updates
+* Public and private board visibility
+
+Task Management
+
+* Create tasks inside board columns
+* Priority levels (Low, Medium, High)
+* Task filtering by priority
+* Search-based task discovery
+
+Activity Feed
+
+* Workspace-level event tracking
+* Board creation events
+* Task creation events
+* Board update logs
+
+Public Board Sharing
+
+* Generate shareable board links
+* Read-only guest access
+* Private board protection
+* No authentication required for public viewers
+
+⸻
+
+Tech Stack
+
+Frontend
+
+* Next.js 15 (App Router)
+* React 19
+* TypeScript
+
+State Management
+
+* TanStack Query (Server State)
+* Zustand (Client State)
+
+Styling
+
+* Tailwind CSS
+
+Drag & Drop
+
+* @hello-pangea/dnd
+
+Data Layer
+
+* Axios
+* Local Storage Mock Database
+
+⸻
+
+Architecture
+
+The project follows a feature-based architecture to keep business logic modular and maintainable.
+
 src/
-├── app/                  # Next.js App Router Pages and Layouts
-│   ├── (auth)/           # Authentication layout and login view
-│   ├── (dashboard)/      # Workspace dashboard shell and pages
-│   └── public/           # Shared read-only public board views
-├── features/             # Feature domains encapsulating hooks, components, and state
-│   ├── auth/             # Session verification and login forms
-│   ├── workspaces/       # Workspace actions and api queries
-│   ├── boards/           # Board canvas and column states
-│   └── tasks/            # Task mutations and dnd handlers
-├── lib/                  # Centralized utilities (mock database, HTTP client, auth helpers)
-└── types/                # Unified TypeScript interfaces
-```
+├── app/
+│   ├── (auth)
+│   ├── (dashboard)
+│   └── public
+│
+├── features/
+│   ├── auth
+│   ├── workspaces
+│   ├── boards
+│   ├── tasks
+│   └── activity-feed
+│
+├── lib/
+│   ├── auth
+│   ├── mock-db
+│   └── api
+│
+└── types/
 
-### Technical Tradeoffs & Design Decisions
+Architecture Decisions
 
-1. **Client-Side Mock Database (`localStorage`)**
-   * **Why**: To keep the assignment zero-dependency and deployment-friendly, a mock database resides in the browser's client storage.
-   * **Tradeoff**: Collaborative updates won't sync across separate client devices/browsers, but it allows fully stateful CRUD operations, dynamic page re-renders, and instant mock latency simulation.
-2. **TanStack Query + Zustand Separation**
-   * Server-managed data (workspaces, boards, tasks) is stored in the React Query cache, allowing easy cache invalidation and mutation overrides.
-   * Client-only state (active search term, current priority filters) is handled in a lightweight Zustand store.
-3. **Dynamic Parameter Resolution (Next.js 15)**
-   * Page routing parameters are Promise-based in Next.js 15. The server pages resolve parameter queries asynchronously before passing parameters to client components, preventing hydration mismatches.
+* Feature-based separation improves maintainability.
+* React Query manages server-like state and caching.
+* Zustand handles lightweight UI state.
+* Mock APIs simulate realistic asynchronous operations.
+* Local storage acts as a persistent browser-side database.
 
----
+⸻
 
-## Local Setup
+Public Board Sharing
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+Users can make a board public from the board settings panel.
 
-2. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
+Once enabled, a public URL is generated:
 
-3. Open [http://localhost:3000](http://localhost:3000) to view the application.
+/public/board/[boardId]
 
-* **Test Credentials**: You can log in using any email address and the default password: `password` (e.g., `test@example.com` / `password`). Successful login seeds a default workspace and board structure automatically.
+Public visitors can:
 
----
+* View tasks
+* View board columns
+* View task priorities
 
-## Vercel Deployment
+Public visitors cannot:
 
-This project builds out-of-the-box on Vercel without requiring external environment variables, database connections, or API configurations.
+* Create tasks
+* Move tasks
+* Modify boards
+* Access workspace data
 
-### Deploy Steps:
-1. Push this workspace code to a remote GitHub repository.
-2. Go to the [Vercel Dashboard](https://vercel.com/) and click **Add New Project**.
-3. Select your repository and select the **Next.js** framework preset.
-4. Click **Deploy**. Vercel will build and host the static and dynamic App Router routes automatically.
+⸻
+
+Setup Instructions
+
+Clone Repository
+
+git clone https://github.com/Princedubey2004/Frontend-assignment.git
+cd Frontend-assignment
+
+Install Dependencies
+
+npm install
+
+Run Development Server
+
+npm run dev
+
+Open:
+
+http://localhost:3000
+
+⸻
+
+Test Credentials
+
+Use any email address with the password below:
+
+Email: test@example.com
+Password: password
+
+Example:
+
+Email: prince@example.com
+Password: password
+
+On first login, the application seeds default workspace and board data automatically.
+
+⸻
+
+Deployment
+
+The project is deployed on Vercel and requires no external services or environment variables.
+
+Production URL
+
+https://frontend-assignment-two-roan.vercel.app/login
+
+Deployment Steps
+
+git push origin main
+
+Then:
+
+1. Import repository into Vercel.
+2. Select Next.js framework preset.
+3. Deploy.
+
+No database setup is required.
+
+⸻
+
+Future Improvements
+
+* Real backend integration
+* Multi-user collaboration
+* Real-time updates using WebSockets
+* User invitations and role management
+* File attachments
+* Task comments
+* Due dates and reminders
+* Analytics dashboard
+
+⸻
+
+Engineering Notes
+
+Detailed technical decisions, tradeoffs, architecture rationale, and implementation notes can be found in:
+
+ENGINEERING_NOTES.md
+
+⸻
+
+Author
+
+Prince Dubey
+
+B.Tech, Electronics & Communication Engineering
+IIIT Bhopal
+
+GitHub:
+https://github.com/Princedubey2004
