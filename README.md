@@ -93,26 +93,27 @@ Architecture
 
 The project follows a feature-based architecture to keep business logic modular and maintainable.
 
+```text
 src/
 ├── app/
-│   ├── (auth)
-│   ├── (dashboard)
-│   └── public
+│   ├── (auth)/
+│   ├── (dashboard)/
+│   └── public/
 │
 ├── features/
-│   ├── auth
-│   ├── workspaces
-│   ├── boards
-│   ├── tasks
-│   └── activity-feed
+│   ├── auth/
+│   ├── workspaces/
+│   ├── boards/
+│   ├── tasks/
+│   └── activity-feed/
 │
 ├── lib/
-│   ├── auth
-│   ├── mock-db
-│   └── api
+│   ├── auth/
+│   ├── mock-db/
+│   └── api/
 │
 └── types/
-
+```
 Architecture Decisions
 
 * Feature-based separation improves maintainability.
